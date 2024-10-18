@@ -27,7 +27,7 @@
 
         $.ajax({
             type: "POST",
-            url: "assets/php/form-process.php",
+            url: "https://uat.iresp.cn/iresp/public/www-form-process",
             data: "name=" + name + "&email=" + email + "&msg_subject=" + msg_subject + "&phone_number=" + phone_number + "&message=" + message,
             success : function(text){
                 if (text == "success"){
