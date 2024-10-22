@@ -31,21 +31,25 @@
             url: "https://uat.iresp.cn/jeecg-boot/iresp/public/www-form-process",
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
-            dataType: "json",
             success: function (text) {
+                console.log(text);
                 if (text == "success") {
                     formSuccess();
                 } else {
                     formError();
                     submitMSG(false, text);
                 }
+            },
+            error: function errorCallback(xhr, status) {
+                debugger;
+                console.log('出问题了！');
             }
         });
     }
 
     function formSuccess() {
         $("#contactForm")[0].reset();
-        submitMSG(true, "Message Submitted!")
+        submitMSG(true, "提交成功")
     }
 
     function formError() {
