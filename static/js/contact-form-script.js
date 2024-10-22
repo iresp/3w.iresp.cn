@@ -16,43 +16,46 @@
     });
 
 
-    function submitForm(){
+    function submitForm() {
         // Initiate Variables With Form Content
-        var name = $("#name").val();
-        var email = $("#email").val();
-        var msg_subject = $("#msg_subject").val();
-        var phone_number = $("#phone_number").val();
-        var message = $("#message").val();
-
+        var data = {
+            name: $("#name").val(),
+            email: $("#email").val(),
+            msg_subject: $("#msg_subject").val(),
+            phone_number: $("#phone_number").val(),
+            message: $("#message").val()
+        };
 
         $.ajax({
             type: "POST",
-            url: "https://uat.iresp.cn/iresp/public/www-form-process",
-            data: "name=" + name + "&email=" + email + "&msg_subject=" + msg_subject + "&phone_number=" + phone_number + "&message=" + message,
-            success : function(text){
-                if (text == "success"){
+            url: "https://uat.iresp.cn/jeecg-boot/iresp/public/www-form-process",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                if (text == "success") {
                     formSuccess();
                 } else {
                     formError();
-                    submitMSG(false,text);
+                    submitMSG(false, text);
                 }
             }
         });
     }
 
-    function formSuccess(){
+    function formSuccess() {
         $("#contactForm")[0].reset();
         submitMSG(true, "Message Submitted!")
     }
 
-    function formError(){
-        $("#contactForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+    function formError() {
+        $("#contactForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass();
         });
     }
 
-    function submitMSG(valid, msg){
-        if(valid){
+    function submitMSG(valid, msg) {
+        if (valid) {
             var msgClasses = "h4 tada animated text-success";
         } else {
             var msgClasses = "h4 text-danger";
